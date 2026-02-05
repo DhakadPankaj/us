@@ -12,17 +12,55 @@ const img5 = "./img/lego-5.png";
 // define your images here
 const images = [ img1,img2, img3, img4, img5];
 
-// get images serially
-var getImage = images[Math.floor(Math.random() * images.length)];
+// Create image element and button if not present
 
-// make the URL into a proper image tag
-var image = "<img src='" + getImage + "'>";
-// append to the div
-document.getElementById("valentines-container").innerHTML = image;
-
+const valentinesContainer = document.getElementById('valentines-container');
 const refreshButton = document.getElementById('refreshButton');
 
-refreshButton.addEventListener('click', function() {
-  location.reload();
+let currentIndex = 0;
 
-});
+function showImage(index) {
+    valentinesContainer.innerHTML = '';
+    const imgElem = document.createElement('img');
+    imgElem.src = images[index];
+    imgElem.alt = `Lego Valentine ${index + 1}`;
+    imgElem.className = 'lego-img';
+    valentinesContainer.appendChild(imgElem);
+}
+
+showImage(currentIndex);
+
+refreshButton.onclick = function() {
+    currentIndex++;
+    if (currentIndex < images.length) {
+        showImage(currentIndex);
+    } else {
+        refreshButton.style.display = 'none';
+        showValentineQuestion();
+    }
+};
+
+function showValentineQuestion() {
+    valentinesContainer.innerHTML = '';
+    const questionDiv = document.createElement('div');
+    questionDiv.id = 'valentineQuestion';
+    questionDiv.innerHTML = `<p>Will you be my valentine for life?</p>`;
+    const yesBtn = document.createElement('button');
+    yesBtn.textContent = 'Yes';
+    yesBtn.className = 'btn';
+    const noBtn = document.createElement('button');
+    noBtn.textContent = 'No';
+    noBtn.className = 'btn';
+    questionDiv.appendChild(yesBtn);
+    questionDiv.appendChild(noBtn);
+    valentinesContainer.appendChild(questionDiv);
+
+    yesBtn.onclick = function() {
+        questionDiv.innerHTML = '<h2>I knew it! ❤️</h2>';
+    };
+    noBtn.onclick = function() {
+        questionDiv.innerHTML = '<h2>.....</h2>';
+    };
+}
+
+
