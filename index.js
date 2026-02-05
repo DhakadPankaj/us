@@ -62,7 +62,7 @@ function showValentineQuestion() {
             yesBtn.textContent = 'I thought you\'d never ask 💕';
             yesBtn.className = 'btn yes-btn';
         const noBtn = document.createElement('button');
-        noBtn.textContent = 'No';
+        noBtn.textContent = 'Nah';
         noBtn.className = 'btn';
         questionDiv.appendChild(yesBtn);
         questionDiv.appendChild(noBtn);
@@ -192,5 +192,6 @@ style.innerHTML = `
     }
 `;
 document.head.appendChild(style);
+
 
 // End of code
