@@ -41,26 +41,56 @@ refreshButton.onclick = function() {
 };
 
 function showValentineQuestion() {
-    valentinesContainer.innerHTML = '';
-    const questionDiv = document.createElement('div');
-    questionDiv.id = 'valentineQuestion';
-    questionDiv.innerHTML = `<p>Will you be my valentine for life?</p>`;
-    const yesBtn = document.createElement('button');
-    yesBtn.textContent = 'Yes';
-    yesBtn.className = 'btn';
-    const noBtn = document.createElement('button');
-    noBtn.textContent = 'No';
-    noBtn.className = 'btn';
-    questionDiv.appendChild(yesBtn);
-    questionDiv.appendChild(noBtn);
-    valentinesContainer.appendChild(questionDiv);
+        valentinesContainer.innerHTML = '';
+        const questionDiv = document.createElement('div');
+        questionDiv.id = 'valentineQuestion';
+        questionDiv.innerHTML = `<p>Will you be my valentine for life?</p>`;
+        const yesBtn = document.createElement('button');
+        yesBtn.textContent = 'Yes';
+        yesBtn.className = 'btn';
+        const noBtn = document.createElement('button');
+        noBtn.textContent = 'No';
+        noBtn.className = 'btn';
+        questionDiv.appendChild(yesBtn);
+        questionDiv.appendChild(noBtn);
+        valentinesContainer.appendChild(questionDiv);
 
-    yesBtn.onclick = function() {
-        questionDiv.innerHTML = '<h2>I knew it! ❤️</h2>';
-    };
-    noBtn.onclick = function() {
-        questionDiv.innerHTML = '<h2>.....</h2>';
-    };
+        yesBtn.onclick = function() {
+                questionDiv.innerHTML = '<h2>I knew it! ❤️</h2>';
+        };
+        noBtn.onclick = function() {
+                noBtn.disabled = true;
+                noBtn.textContent = 'Think again!';
+                questionDiv.innerHTML += '<h2>.....</h2>';
+        };
 }
 
 
+// Style for valentine question and buttons
+const style = document.createElement('style');
+style.innerHTML = `
+    #valentineQuestion {
+        text-align: center;
+        font-family: 'Arial', sans-serif;
+        margin-top: 20px;
+    }
+    #valentineQuestion .btn {
+        margin: 10px;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        border: none;
+        border-radius: 5px;
+    }
+    #valentineQuestion .btn:first-child {
+        background-color: #4CAF50; /* Green */
+        color: white;
+    }
+    #valentineQuestion .btn:last-child {
+        background-color: #f44336; /* Red */
+        color: white;
+    }
+`;
+document.head.appendChild(style);
+
+// End of code
