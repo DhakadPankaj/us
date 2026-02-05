@@ -30,10 +30,23 @@ function showImage(index) {
 
 showImage(currentIndex);
 
+const buttonTexts = [
+    "Next surprise! 😌",
+    "Okay, one more...",
+    "You are not ready for this 👀",
+    "Tap gently 💌",
+    "Okay... last one 💗"
+];
+
+refreshButton.textContent = buttonTexts[0];
+
 refreshButton.onclick = function() {
     currentIndex++;
     if (currentIndex < images.length) {
         showImage(currentIndex);
+        if (currentIndex < buttonTexts.length) {
+            refreshButton.textContent = buttonTexts[currentIndex];
+        }
     } else {
         refreshButton.style.display = 'none';
         showValentineQuestion();
@@ -44,9 +57,9 @@ function showValentineQuestion() {
         valentinesContainer.innerHTML = '';
         const questionDiv = document.createElement('div');
         questionDiv.id = 'valentineQuestion';
-        questionDiv.innerHTML = `<p>Will you be my valentine for life?</p>`;
+        questionDiv.innerHTML = `<p>So.. will you be my Valentine.. today, tomorrow, and forever?</p>`;
         const yesBtn = document.createElement('button');
-            yesBtn.textContent = 'Yes';
+            yesBtn.textContent = 'I thought you\'d never ask 💕';
             yesBtn.className = 'btn yes-btn';
         const noBtn = document.createElement('button');
         noBtn.textContent = 'No';
@@ -56,15 +69,29 @@ function showValentineQuestion() {
         valentinesContainer.appendChild(questionDiv);
 
         yesBtn.onclick = function() {
-                questionDiv.innerHTML = '<h2>I knew it! ❤️</h2>';
+            questionDiv.innerHTML = '<h2>I knew it 😌 <br>You just made me very very happy! ❤️</h2>';
+            showFlowers();
         };
         noBtn.onclick = function() {
-                noBtn.disabled = true;
-                noBtn.textContent = 'Error 404! Page not found';
-                questionDiv.innerHTML += '<h2>...</h2>';
+            noBtn.disabled = true;
+            noBtn.textContent = 'Error 404! <br>Page not found. <br>Please try again.';
+            questionDiv.innerHTML += '<h2>...</h2>';
         };
 }
 
+// Add flower animation
+function showFlowers() {
+    const flowerContainer = document.createElement('div');
+    flowerContainer.id = 'flowerContainer';
+    document.body.appendChild(flowerContainer);
+    for (let i = 0; i < 20; i++) {
+        const flower = document.createElement('div');
+        flower.className = 'flower';
+        flower.style.left = Math.random() * 100 + 'vw';
+        flower.style.animationDelay = (Math.random() * 2) + 's';
+        flowerContainer.appendChild(flower);
+    }
+}
 
 // Style for valentine question and buttons
 const style = document.createElement('style');
@@ -72,12 +99,12 @@ style.innerHTML = `
     #valentineQuestion {
         text-align: center;
         font-family: 'Arial', sans-serif;
-        margin-top: 20px;
+        margin-top: 40px;
     }
     #valentineQuestion .btn {
         margin: 10px;
         padding: 10px 20px;
-        font-size: 16px;
+        font-size: 20px;
         cursor: pointer;
         border: none;
         border-radius: 5px;
@@ -89,6 +116,30 @@ style.innerHTML = `
     #valentineQuestion .btn.yes-btn {
         background-color: #4CAF50 !important; /* Green */
         color: white;
+    }
+    #flowerContainer {
+        pointer-events: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: 9999;
+    }
+    .flower {
+        position: absolute;
+        top: -60px;
+        width: 40px;
+        height: 40px;
+        background: radial-gradient(circle at 50% 50%, #ffb6c1 60%, #ff69b4 100%);
+        border-radius: 50%;
+        box-shadow: 0 0 10px #ff69b4, 0 0 20px #fff0f5;
+        animation: flower-fall 4s linear forwards;
+    }
+    @keyframes flower-fall {
+        0% { top: -60px; opacity: 1; transform: scale(0.7) rotate(0deg); }
+        80% { opacity: 1; }
+        100% { top: 100vh; opacity: 0.7; transform: scale(1.1) rotate(360deg); }
     }
 `;
 document.head.appendChild(style);
