@@ -46,8 +46,8 @@ function showValentineQuestion() {
         questionDiv.id = 'valentineQuestion';
         questionDiv.innerHTML = `<p>Will you be my valentine for life?</p>`;
         const yesBtn = document.createElement('button');
-        yesBtn.textContent = 'Yes';
-        yesBtn.className = 'btn';
+            yesBtn.textContent = 'Yes';
+            yesBtn.className = 'btn yes-btn';
         const noBtn = document.createElement('button');
         noBtn.textContent = 'No';
         noBtn.className = 'btn';
@@ -60,8 +60,8 @@ function showValentineQuestion() {
         };
         noBtn.onclick = function() {
                 noBtn.disabled = true;
-                noBtn.textContent = 'Think again!';
-                questionDiv.innerHTML += '<h2>.....</h2>';
+                noBtn.textContent = 'Error 404! Page not found';
+                questionDiv.innerHTML += '<h2>...</h2>';
         };
 }
 
@@ -82,12 +82,12 @@ style.innerHTML = `
         border: none;
         border-radius: 5px;
     }
-    #valentineQuestion .btn:first-child {
-        background-color: #4CAF50; /* Green */
+    #valentineQuestion .btn {
+        background-color: #f44336; /* Red */
         color: white;
     }
-    #valentineQuestion .btn:last-child {
-        background-color: #f44336; /* Red */
+    #valentineQuestion .btn.yes-btn {
+        background-color: #4CAF50 !important; /* Green */
         color: white;
     }
 `;
